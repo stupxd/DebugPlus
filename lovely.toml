@@ -140,3 +140,15 @@ end
 '''
 match_indent = true
 overwrite = true
+
+[[patches]]
+[patches.pattern]
+target = "engine/controller.lua"
+pattern = 'function Controller:key_press_update(key, dt)'
+position = "after"
+payload = '''
+local debugplus = require("debugplus-core")
+if not debugplus.consoleHandleKey(self, key) then return end
+'''
+match_indent = true
+overwrite = false
